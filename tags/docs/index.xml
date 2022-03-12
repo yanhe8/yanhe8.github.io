@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>docs on Congo</title>
+    <link>/tags/docs/</link>
+    <description>Recent content in docs on Congo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-au</language>
+    <copyright>&amp;copy; 2022 Congo contributors</copyright>
+    <lastBuildDate>Thu, 20 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="/tags/docs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Upgrading from Congo 1.x</title>
+      <link>/docs/version-2/upgrade/</link>
+      <pubDate>Thu, 20 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/version-2/upgrade/</guid>
+      <description>Although Congo 2.</description>
+    </item>
+    
+    <item>
+      <title>What&#39;s New in 2.0 ✨</title>
+      <link>/docs/version-2/</link>
+      <pubDate>Wed, 19 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/version-2/</guid>
+      <description>Congo 2.</description>
+    </item>
+    
+    <item>
+      <title>Installation</title>
+      <link>/docs/installation/</link>
+      <pubDate>Sun, 16 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/installation/</guid>
+      <description>Simply follow the standard Hugo Quick Start procedure to get up and running quickly.</description>
+    </item>
+    
+    <item>
+      <title>Getting Started</title>
+      <link>/docs/getting-started/</link>
+      <pubDate>Sat, 15 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/getting-started/</guid>
+      <description>This section assumes you have already installed the Congo theme.</description>
+    </item>
+    
+    <item>
+      <title>Configuration</title>
+      <link>/docs/configuration/</link>
+      <pubDate>Fri, 14 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/configuration/</guid>
+      <description>Congo is a highly customisable theme and uses some of the latest Hugo features to simplify how it is configured.</description>
+    </item>
+    
+    <item>
+      <title>Homepage Layout</title>
+      <link>/docs/homepage-layout/</link>
+      <pubDate>Thu, 13 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/homepage-layout/</guid>
+      <description>Congo provides a fully flexible homepage layout.</description>
+    </item>
+    
+    <item>
+      <title>Front Matter</title>
+      <link>/docs/front-matter/</link>
+      <pubDate>Wed, 12 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/front-matter/</guid>
+      <description>In addition to the default Hugo front matter parameters, Congo adds a number of additional options to customise the presentation of individual articles.</description>
+    </item>
+    
+    <item>
+      <title>Shortcodes</title>
+      <link>/docs/shortcodes/</link>
+      <pubDate>Tue, 11 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/shortcodes/</guid>
+      <description>In addition to all the default Hugo shortcodes, Congo adds a few extras for additional functionality.</description>
+    </item>
+    
+    <item>
+      <title>Partials</title>
+      <link>/docs/partials/</link>
+      <pubDate>Mon, 10 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/partials/</guid>
+      <description>Analytics # Congo provides built-in support for Fathom Analytics and Google Analytics.</description>
+    </item>
+    
+    <item>
+      <title>Advanced Customisation</title>
+      <link>/docs/advanced-customisation/</link>
+      <pubDate>Sat, 08 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/advanced-customisation/</guid>
+      <description>There are many ways you can make advanced changes to Congo.</description>
+    </item>
+    
+    <item>
+      <title>Hosting &amp; Deployment</title>
+      <link>/docs/hosting-deployment/</link>
+      <pubDate>Fri, 07 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/hosting-deployment/</guid>
+      <description>There are many ways to deploy your Hugo website built with Congo.</description>
+    </item>
+    
+  </channel>
+</rss>

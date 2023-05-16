@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  dir="ltr"
+  class="scroll-smooth"
+  data-default-appearance="light"
+  data-auto-appearance="true"
+><head>
+  <meta charset="utf-8" />
+  
+    <meta http-equiv="content-language" content="en" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  
+  <title>Virtual Environment Management with pyenv &middot; Yan He</title>
+    <meta name="title" content="Virtual Environment Management with pyenv &middot; Yan He" />
+  
+  <meta name="description" content="Yan He" />
+  
+  
+  
+  <link rel="canonical" href="https://Yan-PWBM.github.io/posts/pyenv/" />
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <link
+    type="text/css"
+    rel="stylesheet"
+    href="/css/main.bundle.min.564bd42a5e26b676657968da510e1b5dc2e901c82ae40e09a52f34b39ed1bf23f65778b05cb2d87a4affbbc5296a3cfd0d2f6131469ff95409422e12b6bccfb4.css"
+    integrity="sha512-VkvUKl4mtnZleWjaUQ4bXcLpAcgq5A4JpS80s57RvyP2V3iwXLLYekr/u8Upajz9DS9hMUaf&#43;VQJQi4StrzPtA=="
+  />
+  
+  
+  <script type="text/javascript" src="/js/appearance.min.9f339e83dd90dc94251893129cfc85cc479aaa0f9fba8f785b7fc36119fa50653fec43bcfb790b8e74d0d7586313dc5d4a606d5db8c8ed7a6ac444fa905e3439.js" integrity="sha512-nzOeg92Q3JQlGJMSnPyFzEeaqg&#43;fuo94W3/DYRn6UGU/7EO8&#43;3kLjnTQ11hjE9xdSmBtXbjI7XpqxET6kF40OQ=="></script>
+  
+  
+  
+  
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:title" content="Virtual Environment Management with pyenv" />
+<meta property="og:description" content="How to manage virtual environment with pyenv" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Yan-PWBM.github.io/posts/pyenv/" /><meta property="og:image" content="https://Yan-PWBM.github.io/posts/pyenv/feature.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-10-17T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-10-17T00:00:00+00:00" /><meta property="og:site_name" content="Yan He" />
+
+
+  <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://Yan-PWBM.github.io/posts/pyenv/feature.png"/>
+<meta name="twitter:title" content="Virtual Environment Management with pyenv"/>
+<meta name="twitter:description" content="How to manage virtual environment with pyenv"/>
+
+  
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "Blog posts",
+    "name": "Virtual Environment Management with pyenv",
+    "headline": "Virtual Environment Management with pyenv",
+    "description": "How to manage virtual environment with pyenv",
+    "abstract": "Python is a popular programming language and often times we need to import external libraries to help us perform various tasks.",
+    "inLanguage": "en",
+    "url" : "https:\/\/Yan-PWBM.github.io\/posts\/pyenv\/",
+    "author" : {
+      "@type": "Person",
+      "name": "Yan He"
+    },
+    "copyrightYear": "2022",
+    "dateCreated": "2022-10-17T00:00:00\u002b00:00",
+    "datePublished": "2022-10-17T00:00:00\u002b00:00",
+    
+    "dateModified": "2022-10-17T00:00:00\u002b00:00",
+    
+    "keywords": ["python","pyenv","brew"],
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "1098"
+  }]
+  </script>
+
+
+  
+  
+    <meta name="generator" content="Hugo 0.102.3" />
+  
+  
+  <meta name="author" content="Yan He" />
+  
+    
+      <link href="https://www.linkedin.com/in/yan-he-0bb14b134/" rel="me" />
+    
+      <link href="mailto:yanhe8@seas.upenn.edu" rel="me" />
+    
+      <link href="https://github.com/Yan-PWBM" rel="me" />
+    
+      <link href="https://www.facebook.com/yan.he.39501/" rel="me" />
+    
+  
+  
+  
+
+
+
+
+
+
+  
+  
+  
+  
+
+
+  
+  
+</head>
+<body
+    class="flex flex-col h-screen px-6 m-auto text-lg leading-7 bg-neutral text-neutral-900 sm:px-14 md:px-24 lg:px-32 dark:bg-neutral-800 dark:text-neutral max-w-7xl"
+  >
+    <div id="the-top" class="absolute flex self-center">
+      <a
+        class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 dark:bg-neutral-600 focus:translate-y-0"
+        href="#main-content"
+        ><span class="font-bold ltr:pr-2 rtl:pl-2 text-primary-600 dark:text-primary-400"
+          >&darr;</span
+        >Skip to main content</a
+      >
+    </div><header
+  class="flex justify-between py-6 font-semibold sm:items-center sm:py-10 text-neutral-900 dark:text-neutral"
+>
+  
+  <div>
+    
+      
+        <a href="/">
+          <img
+            src="/img/homepage22.png"
+            width="50"
+            height="50"
+            class="max-w-[10rem] max-h-[10rem] object-scale-down object-left"
+            alt="Yan He"
+          />
+        </a>
+      
+    
+    
+
+  </div>
+  
+  
+    <nav>
+      <ul class="flex flex-col list-none sm:flex-row">
+        
+          <li
+            class="mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0"
+          >
+            <a
+              class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2"
+              href="/bio/"
+              title="Bio/CV"
+              >Bio</a
+            >
+          </li>
+        
+          <li
+            class="mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0"
+          >
+            <a
+              class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2"
+              href="/projects/"
+              title="Projects"
+              >Projects</a
+            >
+          </li>
+        
+          <li
+            class="mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0"
+          >
+            <a
+              class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2"
+              href="/publications/"
+              title="Publications"
+              >Publications</a
+            >
+          </li>
+        
+          <li
+            class="mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0"
+          >
+            <a
+              class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2"
+              href="/other/"
+              title=""
+              >Personal</a
+            >
+          </li>
+        
+          <li
+            class="mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0"
+          >
+            <a
+              class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2"
+              href="/posts/"
+              title="Blog posts"
+              >Blogs</a
+            >
+          </li>
+        
+        
+      </ul>
+    </nav>
+  
+</header>
+<main id="main-content" class="relative grow">
+  <article>
+    <header class="max-w-prose">
+      
+        <ol class="text-sm text-neutral-500 dark:text-neutral-400">
+  
+  
+    
+  
+    
+  
+  <li class="inline hidden">
+    <a
+      class="hover:underline decoration-neutral-300 dark:underline-neutral-600"
+      href="/"
+      >Welcome to My Homepage! :tada:</a
+    ><span class="px-1 text-primary-500">/</span>
+  </li>
+
+  
+  <li class="inline ">
+    <a
+      class="hover:underline decoration-neutral-300 dark:underline-neutral-600"
+      href="/posts/"
+      >Blog posts</a
+    ><span class="px-1 text-primary-500">/</span>
+  </li>
+
+  
+  <li class="inline hidden">
+    <a
+      class="hover:underline decoration-neutral-300 dark:underline-neutral-600"
+      href="/posts/pyenv/"
+      >Virtual Environment Management with pyenv</a
+    ><span class="px-1 text-primary-500">/</span>
+  </li>
+
+</ol>
+
+
+      
+      <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+        Virtual Environment Management with pyenv
+      </h1>
+      <div class="mt-8 mb-12 text-base text-neutral-500 dark:text-neutral-400">
+        
+
+
+
+
+
+  
+  
+
+
+
+  
+
+  
+  
+    
+  
+
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+
+  <div class="flex flex-row flex-wrap items-center">
+    
+    
+      <time datetime="2022-10-17 00:00:00 &#43;0000 UTC">17 October 2022</time><span class="px-2 text-primary-500">&middot;</span><span title="Reading time">6 mins</span><span class="px-2 text-primary-500">&middot;</span>
+
+
+  
+    
+  
+  
+
+<span class="mb-[2px]">
+  <a
+    href="#/posts/pyenv/index.md"
+    class="text-lg hover:text-primary-500"
+    rel="noopener noreferrer"
+    target="_blank"
+    title="Edit content"
+    >
+
+  <span class="relative inline-block align-text-bottom icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M490.3 40.4C512.2 62.27 512.2 97.73 490.3 119.6L460.3 149.7L362.3 51.72L392.4 21.66C414.3-.2135 449.7-.2135 471.6 21.66L490.3 40.4zM172.4 241.7L339.7 74.34L437.7 172.3L270.3 339.6C264.2 345.8 256.7 350.4 248.4 353.2L159.6 382.8C150.1 385.6 141.5 383.4 135 376.1C128.6 370.5 126.4 361 129.2 352.4L158.8 263.6C161.6 255.3 166.2 247.8 172.4 241.7V241.7zM192 63.1C209.7 63.1 224 78.33 224 95.1C224 113.7 209.7 127.1 192 127.1H96C78.33 127.1 64 142.3 64 159.1V416C64 433.7 78.33 448 96 448H352C369.7 448 384 433.7 384 416V319.1C384 302.3 398.3 287.1 416 287.1C433.7 287.1 448 302.3 448 319.1V416C448 469 405 512 352 512H96C42.98 512 0 469 0 416V159.1C0 106.1 42.98 63.1 96 63.1H192z"/></svg>
+
+  </span>
+
+</a
+  >
+</span>
+    
+
+    
+    
+  </div>
+
+  
+  
+
+
+      </div>
+    </header>
+    <section class="flex flex-col max-w-full mt-0 prose lg:flex-row dark:prose-invert">
+      
+        <div class="order-first px-0 lg:max-w-xs ltr:lg:pl-8 rtl:lg:pr-8 lg:order-last">
+          <div class="ltr:pl-5 rtl:pr-5 toc lg:sticky lg:top-10">
+            <details open class="mt-0 overflow-hidden rounded-lg rtl:pr-5 ltr:pl-5 ltr:-ml-5 rtl:-mr-5 lg:mt-3">
+  <summary
+    class="block py-1 text-lg font-semibold cursor-pointer rtl:pr-5 ltr:pl-5 ltr:-ml-5 rtl:-mr-5 text-neutral-800 dark:text-neutral-100 lg:hidden bg-neutral-100 dark:bg-neutral-700"
+  >
+    Table of Contents
+  </summary>
+  <div
+    class="py-2 border-dotted ltr:border-l rtl:border-r rtl:pr-5 ltr:pl-5 ltr:-ml-5 rtl:-mr-5 border-neutral-300 dark:border-neutral-600"
+  >
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#step-1-install-pyenv-and-pyenv-virtualenv">Step 1: Install pyenv and pyenv-virtualenv</a></li>
+    <li><a href="#step-2-set-up-shell-environment-for-pyenv">Step 2: Set up shell environment for Pyenv</a></li>
+    <li><a href="#step-3-use-pyenv-and-pyenv-virtualenv">Step 3: Use <em>pyenv</em> and <em>pyenv-virtualenv</em></a>
+      <ul>
+        <li><a href="#1-pyenv-usage">1. <em>pyenv</em> usage</a></li>
+        <li><a href="#2-pyenv-virtualenv-usage">2. <em>pyenv-virtualenv</em> usage</a></li>
+      </ul>
+    </li>
+    <li><a href="#collaborating-with-others">Collaborating with others</a></li>
+  </ul>
+</nav>
+  </div>
+</details>
+
+          </div>
+        </div>
+      
+      <div class="min-w-0 min-h-0 max-w-prose">
+        <p>Python is a popular programming language and often times we need to import external libraries to help us perform various tasks. However, Python and those external libraries have many different versions, sometimes one python version may not support the libraries that we need, or some of our projects just require a different version of external libraries than another one. When we only have one python installation in our computer and have only that one place to install our packages, we cannot perform all the tasks that have different version requirements for Python or the packages.</p>
+<p>One way to handle this is to create a virtual environment, where the Python (interpreter), libraries and scripts installed into it can be isolated from those installed in other virtual environments. <code>pyenv</code> can help us install different versions of python and easily switch between them; <code>pyenv-virtualenv</code> is a pyenv plugin that provides features to manage virtualenvs (and conda environments) for Python on UNIX-like systems.</p>
+<p><em>Note there are other ways to create virtual environments, this is just one way.</em></p>
+<h2 id="step-1-install-pyenv-and-pyenv-virtualenv" class="relative group">Step 1: Install pyenv and pyenv-virtualenv <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#step-1-install-pyenv-and-pyenv-virtualenv" aria-label="Anchor">#</a></span></h2>
+<p>For MacOS users, you can install <code>pyenv</code> (and <code>pyenv-virtualenv</code>) with <code>Homebrew</code>. If you do not have Homebrew on your computer yet, run the following command in your terminal to install Homebrew first (check <a href="https://brew.sh/" target="_blank">
+  here
+</a> 
+ for more information).</p>
+<pre tabindex="0"><code>/bin/bash -c &#34;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&#34;
+</code></pre><p>After that, install <code>pyenv</code> by running the following commands in your terminal:</p>
+<pre tabindex="0"><code>brew update
+brew install pyenv
+</code></pre><p>install <code>pyenv-virtualenv</code> by running either of the the following 2 commands:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">brew</span> <span class="n">install</span> <span class="n">pyenv</span><span class="o">-</span><span class="n">virtualenv</span>
+</span></span><span class="line"><span class="cl"><span class="n">brew</span> <span class="n">install</span> <span class="o">--</span><span class="n">HEAD</span> <span class="n">pyenv</span><span class="o">-</span><span class="n">virtualenv</span> <span class="c1"># install the latest development version</span>
+</span></span></code></pre></div><h2 id="step-2-set-up-shell-environment-for-pyenv" class="relative group">Step 2: Set up shell environment for Pyenv <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#step-2-set-up-shell-environment-for-pyenv" aria-label="Anchor">#</a></span></h2>
+<p>Depends on your shell type, you need set up the shell environment differently. To check what shell type you have on your computer, open your terminal and it will show up on the top part of the terminal window. The following setup should work for the majority of users for common use cases(see below).</p>
+<p>
+
+
+
+  
+  
+    
+  
+  
+    <figure>
+      <img
+        class="my-0 rounded-md"
+        srcset="
+          /posts/pyenv/shell_type_hu0934cc8493e9659a958af68f82d6fe34_8968_330x0_resize_q75_box.jpg 330w,
+          /posts/pyenv/shell_type_hu0934cc8493e9659a958af68f82d6fe34_8968_660x0_resize_q75_box.jpg 660w,
+          /posts/pyenv/shell_type_hu0934cc8493e9659a958af68f82d6fe34_8968_1024x0_resize_q75_box.jpg 1024w,
+          /posts/pyenv/shell_type_hu0934cc8493e9659a958af68f82d6fe34_8968_1320x0_resize_q75_box.jpg 2x"
+        src="/posts/pyenv/shell_type_hu0934cc8493e9659a958af68f82d6fe34_8968_660x0_resize_q75_box.jpg"
+        alt=""
+      />
+      
+    </figure>
+  
+
+</p>
+<ul>
+<li>For Zsh</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">echo</span> <span class="s1">&#39;export PYENV_ROOT=&#34;$HOME/.pyenv&#34;&#39;</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">zshrc</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s1">&#39;command -v pyenv &gt;/dev/null || export PATH=&#34;$PYENV_ROOT/bin:$PATH&#34;&#39;</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">zshrc</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s1">&#39;eval &#34;$(pyenv init -)&#34;&#39;</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">zshrc</span>
+</span></span></code></pre></div><ul>
+<li>For bash:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># add the commands to ~/.bashrc</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s1">&#39;export PYENV_ROOT=&#34;$HOME/.pyenv&#34;&#39;</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">bashrc</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s1">&#39;command -v pyenv &gt;/dev/null || export PATH=&#34;$PYENV_ROOT/bin:$PATH&#34;&#39;</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">bashrc</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s1">&#39;eval &#34;$(pyenv init -)&#34;&#39;</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">bashrc</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># add the commands to ~/.profile</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s1">&#39;export PYENV_ROOT=&#34;$HOME/.pyenv&#34;&#39;</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">profile</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s1">&#39;command -v pyenv &gt;/dev/null || export PATH=&#34;$PYENV_ROOT/bin:$PATH&#34;&#39;</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">profile</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s1">&#39;eval &#34;$(pyenv init -)&#34;&#39;</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">profile</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># add the commands to ~/.bash_profile</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s1">&#39;export PYENV_ROOT=&#34;$HOME/.pyenv&#34;&#39;</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">bash_profile</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s1">&#39;command -v pyenv &gt;/dev/null || export PATH=&#34;$PYENV_ROOT/bin:$PATH&#34;&#39;</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">bash_profile</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s1">&#39;eval &#34;$(pyenv init -)&#34;&#39;</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">bash_profile</span>
+</span></span></code></pre></div><p>In order to make <code>pyenv-virtualenv</code> work, you need to further add the following:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">eval</span> <span class="s2">&#34;$(pyenv virtualenv-init -)&#34;</span>
+</span></span></code></pre></div><p>After the shell setup steps, remember to restart the shell for the changes to take effect by running</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">exec</span> <span class="s2">&#34;$SHELL&#34;</span>
+</span></span></code></pre></div><h2 id="step-3-use-pyenv-and-pyenv-virtualenv" class="relative group">Step 3: Use <em>pyenv</em> and <em>pyenv-virtualenv</em> <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#step-3-use-pyenv-and-pyenv-virtualenv" aria-label="Anchor">#</a></span></h2>
+<h3 id="1-pyenv-usage" class="relative group">1. <em>pyenv</em> usage <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#1-pyenv-usage" aria-label="Anchor">#</a></span></h3>
+<p>Before installing any new python version with <code>pyenv</code>, first install Python build dependencies following the instructions <a href="https://github.com/pyenv/pyenv/wiki#suggested-build-environment" target="_blank">
+  here
+</a> 
+ under <code>Suggested build environment</code> session.</p>
+<p>By simply typing <code>pyenv</code> in the terminal, you will get a preview of some useful pyenv commands there. The following are some common commands.</p>
+<p><strong>Install/uninstall additional python version</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">pyenv</span> <span class="n">install</span> <span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;</span> <span class="c1"># install e.g. pyenv install 3.7.14</span>
+</span></span><span class="line"><span class="cl"><span class="n">pyenv</span> <span class="n">uninstall</span> <span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;</span> <span class="c1"># uninstall</span>
+</span></span></code></pre></div><p>You can check all the available versions by running the following command:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">pyenv</span> <span class="n">install</span> <span class="o">--</span><span class="nb">list</span> <span class="o">|</span> <span class="n">grep</span> <span class="s2">&#34; 3\.[67891]&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># This will list all the available python versions of 3.6 above</span>
+</span></span></code></pre></div><p><strong>Check Python versions installed under pyenv</strong></p>
+<p>the one with the * in front is the global/default python version. Note that if you have conda installed, the python version under conda environment will not show here.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">pyenv</span> <span class="n">versions</span>
+</span></span></code></pre></div><p>
+
+
+
+  
+  
+    
+  
+  
+    <figure>
+      <img
+        class="my-0 rounded-md"
+        srcset="
+          /posts/pyenv/pyenv_versions_huc94b29e7743c2eef4a3c71df40534b21_10871_330x0_resize_q75_box.jpg 330w,
+          /posts/pyenv/pyenv_versions_huc94b29e7743c2eef4a3c71df40534b21_10871_660x0_resize_q75_box.jpg 660w,
+          /posts/pyenv/pyenv_versions_huc94b29e7743c2eef4a3c71df40534b21_10871_1024x0_resize_q75_box.jpg 1024w,
+          /posts/pyenv/pyenv_versions_huc94b29e7743c2eef4a3c71df40534b21_10871_1320x0_resize_q75_box.jpg 2x"
+        src="/posts/pyenv/pyenv_versions_huc94b29e7743c2eef4a3c71df40534b21_10871_660x0_resize_q75_box.jpg"
+        alt=""
+      />
+      
+    </figure>
+  
+
+</p>
+<p><strong>Switch versions</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">pyenv</span> <span class="n">shell</span> <span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;</span> <span class="c1"># select version for current shell session</span>
+</span></span><span class="line"><span class="cl"><span class="n">pyenv</span> <span class="n">local</span> <span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;</span> <span class="c1"># Set default version for the current directory (or its subdirectories)</span>
+</span></span><span class="line"><span class="cl"><span class="n">pyenv</span> <span class="k">global</span> <span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;</span> <span class="c1"># set global version for user account</span>
+</span></span></code></pre></div><h3 id="2-pyenv-virtualenv-usage" class="relative group">2. <em>pyenv-virtualenv</em> usage <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#2-pyenv-virtualenv-usage" aria-label="Anchor">#</a></span></h3>
+<p><strong>Create a virtual environment with specific python version</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">pyenv</span> <span class="n">virtualenv</span> <span class="o">&lt;</span><span class="n">python_version</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">venv_example</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># e.g. pyenv virtualenv 3.10.4 venv_test</span>
+</span></span></code></pre></div><p><strong>Install packages in the created virual environment</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">pyenv</span> <span class="n">local</span> <span class="o">&lt;</span><span class="n">venv_example</span><span class="o">&gt;</span> <span class="c1"># first go to the virtual environment</span>
+</span></span><span class="line"><span class="cl"><span class="n">pip</span> <span class="n">install</span> <span class="o">&lt;</span><span class="n">package</span><span class="o">&gt;</span>      <span class="c1"># install packages using pip install</span>
+</span></span></code></pre></div><p><strong>Use the virtual environment</strong></p>
+<p>There are multiple ways to use the virtual environment.</p>
+<ul>
+<li>
+<p>If you want to automatically activate the virtual environment for a project folder, you can either</p>
+<ul>
+<li>create a <code>.python-version</code> file in the project folder by running the following command in the terminal:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">echo</span> <span class="o">&lt;</span><span class="n">venv_example</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">project_folder_path</span><span class="o">&gt;/.</span><span class="n">python</span><span class="o">-</span><span class="n">version</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># e.g. echo venv_test &gt; &#39;/Users/yhe210/Desktop/test-env&#39;/.python-version</span>
+</span></span></code></pre></div></li>
+</ul>
+<p>or</p>
+<ul>
+<li>go to the project from a terminal, and run:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">pyenv</span> <span class="n">local</span> <span class="o">&lt;</span><span class="n">venv_example</span><span class="o">&gt;</span>
+</span></span></code></pre></div></li>
+</ul>
+<p>Then everytime you enter the project folder, the virtual environment will be automatically activated, and your codes under that project folder will automatically run via the virtual environment.</p>
+</li>
+<li>
+<p>If you want to (permanently) change the (default) virtual environment for the project folder, you can achieve that by running:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">pyenv</span> <span class="n">local</span> <span class="o">&lt;</span><span class="n">new_venv</span><span class="o">&gt;</span>
+</span></span></code></pre></div><p><strong>Note</strong> that</p>
+<ul>
+<li>if you use the virual environment by creating the <code>.python-version</code> file, you will notice that the <code>.python-version</code> file also changes automatically whenever you change the default virtual environment, it always corresponds to the name of the virtual environment that you set.</li>
+</ul>
+<p>
+
+
+
+  
+  
+    
+  
+  
+    <figure>
+      <img
+        class="my-0 rounded-md"
+        srcset="
+          /posts/pyenv/venv_huf067c9c5f43f4553123223768981d53d_17884_330x0_resize_box_3.png 330w,
+          /posts/pyenv/venv_huf067c9c5f43f4553123223768981d53d_17884_660x0_resize_box_3.png 660w,
+          /posts/pyenv/venv_huf067c9c5f43f4553123223768981d53d_17884_1024x0_resize_box_3.png 1024w,
+          /posts/pyenv/venv_huf067c9c5f43f4553123223768981d53d_17884_1320x0_resize_box_3.png 2x"
+        src="/posts/pyenv/venv_huf067c9c5f43f4553123223768981d53d_17884_660x0_resize_box_3.png"
+        alt=""
+      />
+      
+    </figure>
+  
+
+</p>
+<ul>
+<li><strong>You need to re-enter the project folder everytime after you run <code>pyenv local &lt;venv&gt;</code> in order to make the new virtual environment take effect</strong>.</li>
+</ul>
+<p>You can always check the (default/permenant) virtual environment for your project folder by opening a terminal under that folder and running:</p>
+<pre tabindex="0"><code>pyenv local
+</code></pre></li>
+<li>
+<p>If you are working in <a href="https://github.comcast.com/pages/EBI-Analytics-Knowledge-Base/tutorials/p/get-to-know-visual-studio-code" target="_blank">
+  VS Code
+</a> 
+ you can activate a virtual environment by pressing <code>control+shift+P</code> and select <code>Python: Select Interpreter</code>, refresh by clicking the refreshing bar on the top right (this should give you all available choices in your computer) and choose the virtual environment that you want, this will not change the default virtual environment.
+
+
+
+
+  
+  
+    
+  
+  
+    <figure>
+      <img
+        class="my-0 rounded-md"
+        srcset="
+          /posts/pyenv/python_interpreter_hub08553aa6968665df8e4ccd9e01923fe_157658_330x0_resize_q75_box.jpg 330w,
+          /posts/pyenv/python_interpreter_hub08553aa6968665df8e4ccd9e01923fe_157658_660x0_resize_q75_box.jpg 660w,
+          /posts/pyenv/python_interpreter_hub08553aa6968665df8e4ccd9e01923fe_157658_1024x0_resize_q75_box.jpg 1024w,
+          /posts/pyenv/python_interpreter_hub08553aa6968665df8e4ccd9e01923fe_157658_1320x0_resize_q75_box.jpg 2x"
+        src="/posts/pyenv/python_interpreter_hub08553aa6968665df8e4ccd9e01923fe_157658_660x0_resize_q75_box.jpg"
+        alt=""
+      />
+      
+    </figure>
+  
+
+</p>
+</li>
+<li>
+<p>If you want to temporarily switch to a different virtual environment in current terminal, you can open a terminal and run the following command:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">pyenv</span> <span class="n">shell</span> <span class="o">&lt;</span><span class="n">new_venv</span><span class="o">&gt;</span>
+</span></span></code></pre></div></li>
+</ul>
+<h2 id="collaborating-with-others" class="relative group">Collaborating with others <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#collaborating-with-others" aria-label="Anchor">#</a></span></h2>
+<p>The best part about working with virtual environments is how easy it becomes to work with others on projects. All you need to do is let them know what python version your using and give them a snapshot of your environment using <code>pip freeze &gt; requriements.txt</code>. Now they are able to recreate your  environment on their laptop without changing their global settings.</p>
+<p>It is good practice to have a base environment as your starting shell and then create a new environment for each project you work on.</p>
+<p>Have fun with your Python virtual environments :)</p>
+<p>Some other useful links:</p>
+<p><a href="https://github.com/pyenv/pyenv#set-up-your-shell-environment-for-pyenv" target="_blank">
+  https://github.com/pyenv/pyenv#set-up-your-shell-environment-for-pyenv
+</a> 
+</p>
+<p><a href="https://github.com/pyenv/pyenv-virtualenv" target="_blank">
+  https://github.com/pyenv/pyenv-virtualenv
+</a> 
+</p>
+
+      </div>
+    </section>
+    <footer class="pt-8 max-w-prose">
+      
+  <div class="flex">
+    
+      
+      
+        
+        <img
+          class="w-24 h-24 !mt-0 !mb-0 ltr:mr-4 rtl:ml-4 rounded-full"
+          width="96"
+          height="96"
+          alt="Author"
+          src="/img/author_yh_hu4964fbec6e8b7d0f082d5a6b42cd508a_302984_192x192_fill_q75_box_smart1.jpeg"
+        />
+      
+    
+    <div class="place-self-center">
+      
+        <div class="text-[0.6rem] leading-3 text-neutral-500 dark:text-neutral-400 uppercase">
+          Author
+        </div>
+        <div class="font-semibold leading-6 text-neutral-800 dark:text-neutral-300">
+          Yan He
+        </div>
+      
+      
+        <div class="text-sm text-neutral-700 dark:text-neutral-400">Yan He</div>
+      
+      <div class="text-2xl sm:text-lg">
+  <div class="flex flex-wrap text-neutral-400 dark:text-neutral-500">
+    
+      
+        <a
+          class="px-1 hover:text-primary-700 dark:hover:text-primary-400"
+          href="https://www.linkedin.com/in/yan-he-0bb14b134/"
+          target="_blank"
+          aria-label="Linkedin"
+          rel="me noopener noreferrer"
+          >
+
+  <span class="relative inline-block align-text-bottom icon">
+    <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 382 382" style="enable-background:new 0 0 382 382;" xml:space="preserve">
+<path style="fill:#0077B7;" d="M347.445,0H34.555C15.471,0,0,15.471,0,34.555v312.889C0,366.529,15.471,382,34.555,382h312.889
+	C366.529,382,382,366.529,382,347.444V34.555C382,15.471,366.529,0,347.445,0z M118.207,329.844c0,5.554-4.502,10.056-10.056,10.056
+	H65.345c-5.554,0-10.056-4.502-10.056-10.056V150.403c0-5.554,4.502-10.056,10.056-10.056h42.806
+	c5.554,0,10.056,4.502,10.056,10.056V329.844z M86.748,123.432c-22.459,0-40.666-18.207-40.666-40.666S64.289,42.1,86.748,42.1
+	s40.666,18.207,40.666,40.666S109.208,123.432,86.748,123.432z M341.91,330.654c0,5.106-4.14,9.246-9.246,9.246H286.73
+	c-5.106,0-9.246-4.14-9.246-9.246v-84.168c0-12.556,3.683-55.021-32.813-55.021c-28.309,0-34.051,29.066-35.204,42.11v97.079
+	c0,5.106-4.139,9.246-9.246,9.246h-44.426c-5.106,0-9.246-4.14-9.246-9.246V149.593c0-5.106,4.14-9.246,9.246-9.246h44.426
+	c5.106,0,9.246,4.14,9.246,9.246v15.655c10.497-15.753,26.097-27.912,59.312-27.912c73.552,0,73.131,68.716,73.131,106.472
+	L341.91,330.654L341.91,330.654z"/>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+
+  </span>
+
+</a
+        >
+      
+    
+      
+        <a
+          class="px-1 hover:text-primary-700 dark:hover:text-primary-400"
+          href="mailto:yanhe8@seas.upenn.edu"
+          target="_blank"
+          aria-label="Email"
+          rel="me noopener noreferrer"
+          >
+
+  <span class="relative inline-block align-text-bottom icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M207.8 20.73c-93.45 18.32-168.7 93.66-187 187.1c-27.64 140.9 68.65 266.2 199.1 285.1c19.01 2.888 36.17-12.26 36.17-31.49l.0001-.6631c0-15.74-11.44-28.88-26.84-31.24c-84.35-12.98-149.2-86.13-149.2-174.2c0-102.9 88.61-185.5 193.4-175.4c91.54 8.869 158.6 91.25 158.6 183.2l0 16.16c0 22.09-17.94 40.05-40 40.05s-40.01-17.96-40.01-40.05v-120.1c0-8.847-7.161-16.02-16.01-16.02l-31.98 .0036c-7.299 0-13.2 4.992-15.12 11.68c-24.85-12.15-54.24-16.38-86.06-5.106c-38.75 13.73-68.12 48.91-73.72 89.64c-9.483 69.01 43.81 128 110.9 128c26.44 0 50.43-9.544 69.59-24.88c24 31.3 65.23 48.69 109.4 37.49C465.2 369.3 496 324.1 495.1 277.2V256.3C495.1 107.1 361.2-9.332 207.8 20.73zM239.1 304.3c-26.47 0-48-21.56-48-48.05s21.53-48.05 48-48.05s48 21.56 48 48.05S266.5 304.3 239.1 304.3z"/></svg>
+
+  </span>
+
+</a
+        >
+      
+    
+      
+        <a
+          class="px-1 hover:text-primary-700 dark:hover:text-primary-400"
+          href="https://github.com/Yan-PWBM"
+          target="_blank"
+          aria-label="Github"
+          rel="me noopener noreferrer"
+          >
+
+  <span class="relative inline-block align-text-bottom icon">
+    <svg width="32px" height="32px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <path d="M16 0.396c-8.839 0-16 7.167-16 16 0 7.073 4.584 13.068 10.937 15.183 0.803 0.151 1.093-0.344 1.093-0.772 0-0.38-0.009-1.385-0.015-2.719-4.453 0.964-5.391-2.151-5.391-2.151-0.729-1.844-1.781-2.339-1.781-2.339-1.448-0.989 0.115-0.968 0.115-0.968 1.604 0.109 2.448 1.645 2.448 1.645 1.427 2.448 3.744 1.74 4.661 1.328 0.14-1.031 0.557-1.74 1.011-2.135-3.552-0.401-7.287-1.776-7.287-7.907 0-1.751 0.62-3.177 1.645-4.297-0.177-0.401-0.719-2.031 0.141-4.235 0 0 1.339-0.427 4.4 1.641 1.281-0.355 2.641-0.532 4-0.541 1.36 0.009 2.719 0.187 4 0.541 3.043-2.068 4.381-1.641 4.381-1.641 0.859 2.204 0.317 3.833 0.161 4.235 1.015 1.12 1.635 2.547 1.635 4.297 0 6.145-3.74 7.5-7.296 7.891 0.556 0.479 1.077 1.464 1.077 2.959 0 2.14-0.020 3.864-0.020 4.385 0 0.416 0.28 0.916 1.104 0.755 6.4-2.093 10.979-8.093 10.979-15.156 0-8.833-7.161-16-16-16z"/>
+</svg>
+
+  </span>
+
+</a
+        >
+      
+    
+      
+        <a
+          class="px-1 hover:text-primary-700 dark:hover:text-primary-400"
+          href="https://www.facebook.com/yan.he.39501/"
+          target="_blank"
+          aria-label="Facebook"
+          rel="me noopener noreferrer"
+          >
+
+  <span class="relative inline-block align-text-bottom icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"/></svg>
+
+  </span>
+
+</a
+        >
+      
+    
+  </div>
+
+</div>
+    </div>
+  </div>
+
+
+      
+
+      
+  
+
+
+    </footer>
+    
+  </article>
+
+      
+        <div
+          class="absolute top-[110vh] ltr:right-0 rtl:left-0 w-12 pointer-events-none bottom-[-5.5rem]"
+        >
+          <a
+            href="#the-top"
+            class="w-12 h-12 sticky pointer-events-auto top-[calc(100vh-5rem)] bg-neutral/50 dark:bg-neutral-800/50 backdrop-blur rounded-full text-xl flex items-center justify-center text-neutral-700 dark:text-neutral hover:text-primary-600 dark:hover:text-primary-400"
+            aria-label="Scroll to top"
+            title="Scroll to top"
+          >
+            &uarr;
+          </a>
+        </div>
+      
+    </main>
+    <footer class="py-10">
+  
+  
+    <nav class="pb-4 text-base font-medium text-neutral-500 dark:text-neutral-400">
+      <ul class="flex flex-col list-none sm:flex-row">
+        
+          <li class="mb-1 sm:mb-0 sm:mr-7 sm:last:mr-0">
+            <a
+              class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2"
+              href="/tags/"
+              title="Tags"
+              >Tags</a
+            >
+          </li>
+        
+      </ul>
+    </nav>
+  
+  <div class="flex justify-between">
+    <div>
+      
+      <p class="text-sm text-neutral-500 dark:text-neutral-400">
+          &copy;
+          2023
+          Yan He
+      </p>
+      
+      
+        <p class="text-xs text-neutral-500 dark:text-neutral-400">
+          
+          
+          
+        </p>
+      
+    </div>
+    
+    
+      <div
+        class="text-sm cursor-pointer text-neutral-700 dark:text-neutral hover:text-primary-600 dark:hover:text-primary-400 ltr:mr-14 rtl:ml-14"
+      >
+        <button
+          id="appearance-switcher"
+          class="w-12 h-12 "
+          type="button"
+          title="Switch to dark appearance"
+        >
+          <span class="inline dark:hidden">
+
+  <span class="relative inline-block align-text-bottom icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
+
+  </span>
+
+</span>
+          <span class="hidden dark:inline">
+
+  <span class="relative inline-block align-text-bottom icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
+
+  </span>
+
+</span>
+        </button>
+      </div>
+    
+  </div>
+  
+  
+</footer>
+</body>
+</html>

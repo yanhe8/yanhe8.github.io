@@ -2,9 +2,9 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Bio/CV on Yan He</title>
-    <link>https://Yan-PWBM.github.io/bio/</link>
+    <link>https://yanhe8.github.io/bio/</link>
     <description>Recent content in Bio/CV on Yan He</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language><atom:link href="https://Yan-PWBM.github.io/bio/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language><atom:link href="https://yanhe8.github.io/bio/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://Yan-PWBM.github.io/sitemap.xml
+Sitemap: https://yanhe8.github.io/sitemap.xml

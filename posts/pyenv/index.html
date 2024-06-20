@@ -94,7 +94,7 @@
     "keywords": ["python","pyenv","brew"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "1105"
+    "wordCount": "1104"
   }]
   </script>
 
@@ -380,18 +380,18 @@
       
       <div class="min-w-0 min-h-0 max-w-prose">
         <p>Python is a popular programming language and often times we need to import external libraries to help us perform various tasks. However, Python and those external libraries have many different versions, sometimes one python version may not support the libraries that we need, or some of our projects just require a different version of external libraries than another one. When we only have one python installation in our computer and have only that one place to install our packages, we cannot perform all the tasks that have different version requirements for Python or the packages.</p>
-<p>One way to handle this is to create a virtual environment, where the Python (interpreter), libraries and scripts installed into it can be isolated from those installed in other virtual environments. <code>pyenv</code> can help us install different versions of python and easily switch between them; <code>pyenv-virtualenv</code> is a pyenv plugin that provides features to manage virtualenvs (and conda environments) for Python on UNIX-like systems.</p>
+<p>One way to handle this is to create a virtual environment, where the Python (interpreter), libraries and scripts installed into it can be isolated from those installed in other virtual environments. <strong>pyenv</strong> can help us install different versions of python and easily switch between them; <strong>pyenv-virtualenv</strong> is a pyenv plugin that provides features to manage virtualenvs (and conda environments) for Python on UNIX-like systems.</p>
 <p><em>Note there are other ways to create virtual environments, this is just one way.</em></p>
 <h2 id="step-1-install-pyenv-and-pyenv-virtualenv" class="relative group">Step 1: Install pyenv and pyenv-virtualenv <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#step-1-install-pyenv-and-pyenv-virtualenv" aria-label="Anchor">#</a></span></h2>
-<p>For MacOS users, you can install <code>pyenv</code> (and <code>pyenv-virtualenv</code>) with <code>Homebrew</code>. If you do not have Homebrew on your computer yet, run the following command in your terminal to install Homebrew first (check <a href="https://brew.sh/" target="_blank">
+<p>For MacOS users, you can install <strong>pyenv</strong> (and <strong>pyenv-virtualenv</strong>) with <strong>Homebrew</strong>. If you do not have Homebrew on your computer yet, run the following command in your terminal to install Homebrew first (check <a href="https://brew.sh/" target="_blank">
   here
 </a> 
  for more information).</p>
 <pre tabindex="0"><code>/bin/bash -c &#34;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&#34;
-</code></pre><p>After that, install <code>pyenv</code> by running the following commands in your terminal:</p>
+</code></pre><p>After that, install <strong>pyenv</strong> by running the following commands in your terminal:</p>
 <pre tabindex="0"><code>brew update
 brew install pyenv
-</code></pre><p>install <code>pyenv-virtualenv</code> by running either of the the following 2 commands:</p>
+</code></pre><p>install <strong>pyenv-virtualenv</strong> by running either of the the following 2 commands:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">brew</span> <span class="n">install</span> <span class="n">pyenv</span><span class="o">-</span><span class="n">virtualenv</span>
 </span></span><span class="line"><span class="cl"><span class="n">brew</span> <span class="n">install</span> <span class="o">--</span><span class="n">HEAD</span> <span class="n">pyenv</span><span class="o">-</span><span class="n">virtualenv</span> <span class="c1"># install the latest development version</span>
 </span></span></code></pre></div><h2 id="step-2-set-up-shell-environment-for-pyenv" class="relative group">Step 2: Set up shell environment for Pyenv <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#step-2-set-up-shell-environment-for-pyenv" aria-label="Anchor">#</a></span></h2>
@@ -444,17 +444,17 @@ brew install pyenv
 </span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s1">&#39;export PYENV_ROOT=&#34;$HOME/.pyenv&#34;&#39;</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">bash_profile</span>
 </span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s1">&#39;command -v pyenv &gt;/dev/null || export PATH=&#34;$PYENV_ROOT/bin:$PATH&#34;&#39;</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">bash_profile</span>
 </span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s1">&#39;eval &#34;$(pyenv init -)&#34;&#39;</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">bash_profile</span>
-</span></span></code></pre></div><p>In order to make <code>pyenv-virtualenv</code> work, you need to further add the following:</p>
+</span></span></code></pre></div><p>In order to make <strong>pyenv-virtualenv</strong> work, you need to further add the following:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">eval</span> <span class="s2">&#34;$(pyenv virtualenv-init -)&#34;</span>
 </span></span></code></pre></div><p>After the shell setup steps, remember to restart the shell for the changes to take effect by running</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">exec</span> <span class="s2">&#34;$SHELL&#34;</span>
 </span></span></code></pre></div><h2 id="step-3-use-pyenv-and-pyenv-virtualenv" class="relative group">Step 3: Use <em>pyenv</em> and <em>pyenv-virtualenv</em> <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#step-3-use-pyenv-and-pyenv-virtualenv" aria-label="Anchor">#</a></span></h2>
 <h3 id="1-pyenv-usage" class="relative group">1. <em>pyenv</em> usage <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#1-pyenv-usage" aria-label="Anchor">#</a></span></h3>
-<p>Before installing any new python version with <code>pyenv</code>, first install Python build dependencies following the instructions <a href="https://github.com/pyenv/pyenv/wiki#suggested-build-environment" target="_blank">
+<p>Before installing any new python version with <strong>pyenv</strong>, first install Python build dependencies following the instructions <a href="https://github.com/pyenv/pyenv/wiki#suggested-build-environment" target="_blank">
   here
 </a> 
- under <code>Suggested build environment</code> session.</p>
-<p>By simply typing <code>pyenv</code> in the terminal, you will get a preview of some useful pyenv commands there. The following are some common commands.</p>
+ under <strong>Suggested build environment</strong> session.</p>
+<p>By simply typing <strong>pyenv</strong> in the terminal, you will get a preview of some useful pyenv commands there. The following are some common commands.</p>
 <p><strong>Install/uninstall additional python version</strong></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">pyenv</span> <span class="n">install</span> <span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;</span> <span class="c1"># install e.g. pyenv install 3.7.14</span>
 </span></span><span class="line"><span class="cl"><span class="n">pyenv</span> <span class="n">uninstall</span> <span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;</span> <span class="c1"># uninstall</span>
@@ -507,7 +507,7 @@ brew install pyenv
 <li>
 <p>If you want to automatically activate the virtual environment for a project folder, you can either</p>
 <ul>
-<li>create a <code>.python-version</code> file in the project folder by running the following command in the terminal:
+<li>create a <strong>.python-version</strong> file in the project folder by running the following command in the terminal:
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">echo</span> <span class="o">&lt;</span><span class="n">venv_example</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">project_folder_path</span><span class="o">&gt;/.</span><span class="n">python</span><span class="o">-</span><span class="n">version</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># e.g. echo venv_test &gt; &#39;/Users/yanhe/Desktop/test-env&#39;/.python-version</span>
 </span></span></code></pre></div></li>
@@ -525,7 +525,7 @@ brew install pyenv
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">pyenv</span> <span class="n">local</span> <span class="o">&lt;</span><span class="n">new_venv</span><span class="o">&gt;</span>
 </span></span></code></pre></div><p><strong>Note</strong> that</p>
 <ul>
-<li>if you use the virual environment by creating the <code>.python-version</code> file, you will notice that the <code>.python-version</code> file also changes automatically whenever you change the default virtual environment, it always corresponds to the name of the virtual environment that you set.</li>
+<li>if you use the virual environment by creating the <strong>.python-version</strong> file, you will notice that the <strong>.python-version</strong> file also changes automatically whenever you change the default virtual environment, it always corresponds to the name of the virtual environment that you set.</li>
 </ul>
 <p>
 
@@ -553,7 +553,7 @@ brew install pyenv
 
 </p>
 <ul>
-<li><strong>You need to re-enter the project folder everytime after you run <code>pyenv local &lt;venv&gt;</code> in order to make the new virtual environment take effect</strong>.</li>
+<li><strong>You need to re-enter the project folder everytime after you run <strong>pyenv local <venv></strong> in order to make the new virtual environment take effect</strong>.</li>
 </ul>
 <p>You can always check the (default/permenant) virtual environment for your project folder by opening a terminal under that folder and running:</p>
 <pre tabindex="0"><code>pyenv local
@@ -562,7 +562,7 @@ brew install pyenv
 <p>If you are working in <a href="https://code.visualstudio.com/" target="_blank">
   VS Code
 </a> 
- you can activate a virtual environment by pressing <code>control+shift+P</code> and select <code>Python: Select Interpreter</code>, refresh by clicking the refreshing bar on the top right (this should give you all available choices in your computer) and choose the virtual environment that you want, this will not change the default virtual environment.
+ you can activate a virtual environment by pressing <strong>control+shift+P</strong> and select <strong>Python: Select Interpreter</strong>, refresh by clicking the refreshing bar on the top right (this should give you all available choices in your computer) and choose the virtual environment that you want, this will not change the default virtual environment.
 
 
 
@@ -595,7 +595,7 @@ brew install pyenv
 </span></span></code></pre></div></li>
 </ul>
 <h2 id="collaborating-with-others" class="relative group">Collaborating with others <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#collaborating-with-others" aria-label="Anchor">#</a></span></h2>
-<p>The best part about working with virtual environments is how easy it becomes to work with others on projects. All you need to do is let them know what python version your using and give them a snapshot of your environment using <code>pip freeze &gt; requriements.txt</code>. Now they are able to recreate your  environment on their laptop without changing their global settings.</p>
+<p>The best part about working with virtual environments is how easy it becomes to work with others on projects. All you need to do is let them know what python version your using and give them a snapshot of your environment using <strong>pip freeze &gt; requriements.txt</strong>. Now they are able to recreate your  environment on their laptop without changing their global settings.</p>
 <p>It is good practice to have a base environment as your starting shell and then create a new environment for each project you work on.</p>
 <p>Have fun with your Python virtual environments :)</p>
 <p>Some other useful links:</p>

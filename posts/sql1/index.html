@@ -93,7 +93,7 @@
     
     
     "mainEntityOfPage": "true",
-    "wordCount": "1561"
+    "wordCount": "1774"
   }]
   </script>
 
@@ -308,7 +308,7 @@
   <div class="flex flex-row flex-wrap items-center">
     
     
-      <time datetime="2023-03-22 00:00:00 &#43;0000 UTC">22 March 2023</time><span class="px-2 text-primary-500">&middot;</span><span title="Reading time">8 mins</span><span class="px-2 text-primary-500">&middot;</span>
+      <time datetime="2023-03-22 00:00:00 &#43;0000 UTC">22 March 2023</time><span class="px-2 text-primary-500">&middot;</span><span title="Reading time">9 mins</span><span class="px-2 text-primary-500">&middot;</span>
 
 
   
@@ -404,10 +404,20 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">from</span><span class="w"> </span><span class="n">data_base</span><span class="p">.</span><span class="n">left_table</span><span class="w"> </span><span class="n">l</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">left</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">data_base</span><span class="p">.</span><span class="n">right_table</span><span class="w"> </span><span class="n">r</span><span class="w"> 
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- can change left join to right join, inner join or outer join
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">where</span><span class="w"> </span><span class="n">l</span><span class="p">.</span><span class="n">start_date</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">start_date</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- here the &gt; can be other unequal operations such as &lt;&gt;, &lt;, between
-</span></span></span><span class="line"><span class="cl"><span class="c1">-- here we are joining two tables based on id and name columns
-</span></span></span></code></pre></div><p>Note that instead of using <em>ON</em> clause, with the unequal condition, we use <em>WHERE</em> clause. Whenever the <em>WHERE</em> clause is omitted, the default result is CROSS JOIN or a Cartesian product. This means the query will return every combination of rows from the left table with every combination of rows from the right table, which you should probably avoid.</p>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">on</span><span class="w"> </span><span class="n">l</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">l</span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="n">r</span><span class="p">.</span><span class="n">name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">and</span><span class="w"> </span><span class="n">l</span><span class="p">.</span><span class="n">start_date</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">start_date</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- here we are joining two tables based on id and name columns and also having an unequal condition to make sure the start date in left table is greater than the start date in the right table
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- here the &gt; can be other unequal operations such as &lt;&gt;, &lt;, between
+</span></span></span></code></pre></div><p>Note that here the unequal condition is within the <em>ON</em> clause in the above sample query. We can also move the unequal condition to a <em>WHERE</em> clause like following, which may return different results depending on what kind of join you are using - this is because when it is within <em>ON</em> cluase, it is a join condition while when it is within <em>WHERE</em> clause, it further filters the data after the join operation (the resulting table would be the same for inner join no matter whether the unequal condition is in <em>ON</em> or <em>WHERE</em> clause).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="n">l</span><span class="p">.</span><span class="n">col1</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">col2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">from</span><span class="w"> </span><span class="n">data_base</span><span class="p">.</span><span class="n">left_table</span><span class="w"> </span><span class="n">l</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">left</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">data_base</span><span class="p">.</span><span class="n">right_table</span><span class="w"> </span><span class="n">r</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- can change left join to right join, inner join or outer join
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">on</span><span class="w"> </span><span class="n">l</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">l</span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="n">r</span><span class="p">.</span><span class="n">name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">where</span><span class="w"> </span><span class="n">l</span><span class="p">.</span><span class="n">start_date</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">start_date</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- here we are joining two tables based on id and name columns and using an unequal condition to further filter the resulting table from join operation to make sure that the start date in left table is greater than the start date in the right table
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- here the &gt; can be other unequal operations such as &lt;&gt;, &lt;, between
+</span></span></span></code></pre></div><p>Whenever the <em>ON</em> clause is omitted, the default result is CROSS JOIN or a Cartesian product. This means the query will return every combination of rows from the left table with every combination of rows from the right table, which you should probably avoid since it might be very computationally expensive.</p>
 <p>Here we will skip covering too much details of <em>self join</em> and <em>cross join</em> since they are less common.</p>
 <h2 id="3-union" class="relative group">3. Union <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#3-union" aria-label="Anchor">#</a></span></h2>
 <p>If <em>join</em> is combining data horizontally, then <em>union</em> is to concatenate/append data vertically. Again, one <em>union</em> operator happens between two tables (left and right, can be the same table) - you should expect the number of rows in the resulting table equal or greater than the number of rows in either left or right table. Basic query format:</p>
